@@ -78,7 +78,10 @@ const CreateBrandForm = () => {
           const result: Promise<any> = response.json()
           setFormResult(await result)
         })
-        .catch((error) => { throw error })
+        .catch((error) => { 
+          console.error('Error: ', error)
+          setFormResult({ success: '', error: ' ' })
+         })
     }
   };
 
