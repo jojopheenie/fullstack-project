@@ -51,6 +51,7 @@ const CreateBrandForm = () => {
   const [openErrorAlert, setOpenErrorAlert] = useState(false);
   const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(true);
+  const [disableEmailInput, setDisableEmailInput] = useState(false);
 
   const validateEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (validator.isEmail(event.target.value)) {
@@ -83,6 +84,7 @@ const CreateBrandForm = () => {
 
   const resetForm = () => {
     setFormResult({ success: '', error: '' })
+    setDisableEmailInput(false);
     setEmailError('')
     setEditFields({
       email: '',
@@ -100,10 +102,12 @@ const CreateBrandForm = () => {
     if (formResult.error.length) {
       setOpenErrorAlert(true);
       setDisableSubmit(true);
+      setDisableEmailInput(true);
     }
     if (formResult.success.length) {
       setOpenSuccessAlert(true);
       setDisableSubmit(true);
+      setDisableEmailInput(true);
     }
   }, [formResult])
 
@@ -121,6 +125,7 @@ const CreateBrandForm = () => {
           label={"What's your e-SNAIL?"}
           variant={'outlined'}
           value={editFields.email}
+          disabled={disableEmailInput}
           type={'email'}
           size={'medium'}
           helperText={'(email)'}
