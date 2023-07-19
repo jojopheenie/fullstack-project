@@ -7,9 +7,10 @@ readme = "README.md"
 packages = [{include = "intsureview_be"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 Django = "~4.1.9"
 djangorestframework = "^3.14.0"
+django-cors-headers = "^4.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
