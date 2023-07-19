@@ -47,11 +47,11 @@ const CreateBrandForm = () => {
     highOxygen: false
   });
   const [formResult, setFormResult] = useState<ResultData>({ success: '', error: '' });
-  const [emailError, setEmailError] = useState('');
-  const [openErrorAlert, setOpenErrorAlert] = useState(false);
-  const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
-  const [disableSubmit, setDisableSubmit] = useState(true);
-  const [disableEmailInput, setDisableEmailInput] = useState(false);
+  const [emailError, setEmailError] = useState<string>('');
+  const [openErrorAlert, setOpenErrorAlert] = useState<boolean>(false);
+  const [openSuccessAlert, setOpenSuccessAlert] = useState<boolean>(false);
+  const [disableSubmit, setDisableSubmit] = useState<boolean>(true);
+  const [disableEmailInput, setDisableEmailInput] = useState<boolean>(false);
 
   const validateEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (validator.isEmail(event.target.value)) {
@@ -78,10 +78,10 @@ const CreateBrandForm = () => {
           const result: Promise<any> = response.json()
           setFormResult(await result)
         })
-        .catch((error) => { 
+        .catch((error: any) => {
           console.error('Error: ', error)
           setFormResult({ success: '', error: ' ' })
-         })
+        })
     }
   };
 
@@ -120,7 +120,7 @@ const CreateBrandForm = () => {
         Welcome! Please fill OAK this form to WREATHquest plant recommendations. </Typography>
       <Typography variant={'body1'} sx={{ marginBottom: 3 }}>
         Tell us what kind of plants you've been VINEing for.</Typography>
-      <form autoComplete={'off'}>
+      <form autoComplete={'off'} onSubmit={(e: any) => handleSubmit(e)}>
         <TextField
           id={'email'}
           sx={{ width: '40%' }}
@@ -296,7 +296,7 @@ const CreateBrandForm = () => {
               }
               sx={{ width: '40%', margin: 'auto', mb: 2 }}
             >
-              UnbeLEAFable! Sorry, but there was an error. {formResult.error} Please TREE again 
+              UnbeLEAFable! Sorry, but there was an error. {formResult.error} Please TREE again
               or CORNtact josephinexamos@gmail.com for support.
             </Alert>
           </Collapse> : ""}
@@ -323,10 +323,10 @@ const CreateBrandForm = () => {
         </Collapse> : ""}
 
         <Button
-          onClick={(e: any) => handleSubmit(e)}
           variant={'contained'}
           color={'success'}
           disabled={disableSubmit}
+          type={'submit'}
           className={'button'}>
           Submit
         </Button>
